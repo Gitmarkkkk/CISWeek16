@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class FinalView extends JFrame{
+    static FinalFolder m;
     //Interface Implementation
     JPanel p1=new JPanel();
     JLabel Title=new JLabel("Employee Data Entry");
@@ -15,7 +16,7 @@ public class FinalView extends JFrame{
     JLabel Ptype=new JLabel("Phone Type: ");
     JLabel Pnumber=new JLabel("Phone # : ");
     JLabel Address=new JLabel("Address: ");
-    JLabel Apartment= new JLabel("Apartment/Floor");
+    JLabel Apartment= new JLabel("Apartment: ");
     JLabel City=new JLabel("City : ");
     JLabel State=new JLabel("State : ");
     JButton bt1=new JButton("Clear Fields");
@@ -27,9 +28,9 @@ public class FinalView extends JFrame{
     static JTextField Tapartment=new JTextField();
     static JTextField Tcity=new JTextField();
     static JTextField Tstate=new JTextField();
-    JTextArea TAcomments=new JTextArea();
+    static JTextArea TAcomments=new JTextArea();
     
-     JRadioButton r1=new JRadioButton("Cell Phone");    
+    static JRadioButton r1=new JRadioButton("Cell Phone");    
      JRadioButton r2=new JRadioButton("Land Phone");  
      ButtonGroup bg=new ButtonGroup();  
  
@@ -61,7 +62,7 @@ public class FinalView extends JFrame{
         bt1.setBounds(40, 590, 150, 30);
         bt1.addActionListener(new clearfield());
         bt2.setBounds(200, 590, 150, 30);
-        //bt2.addActionListener(new c);
+        bt2.addActionListener(new mark());
 
         
         //bg.add(r1);bg.add(r2);
@@ -78,6 +79,8 @@ public class FinalView extends JFrame{
         p1.add(Tnumber);
         p1.add(Address);
         p1.add(Taddress);
+        p1.add(Apartment);
+        p1.add(Tapartment);
         p1.add(City);
         p1.add(Tcity);
         p1.add(State);
@@ -110,9 +113,27 @@ public class FinalView extends JFrame{
     
     }
 }
+   public static class mark implements ActionListener{
+   @Override
+   public void actionPerformed(ActionEvent e){
+       m = new FinalFolder();
+       String l = Tlname.getText();
+       String f = Tfname.getText();
+       String n = Tnumber.getText();
+       String a1 = Taddress.getText();
+       String a2 = Tapartment.getText();
+       String c = Tcity.getText();
+       String s = Tstate.getText();
+       int ft;
+       if(r1.isSelected()){
+           ft=1;
+       }
+       else
+       {
+           ft=2;
+       }
+       m.InsertMethod(l, f, ft, n, a1, a2, c, s);
+       TAcomments.setText("Congrtulations, Data is Saved!");
+   }
+   }
 }
-    //public static class clearfield implements ActionListener{
-    //@Override
-    //public void actionPerformed(ActionEvent e){    
-    //}
-   // }
